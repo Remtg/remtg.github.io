@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>猫娘展示页：195 个模型的代价 · 猫窝</title>
+<meta name="description" content="NekoWebShow 单页版部署实录。195 个模型每个 2-3 MB，仓库 1.9GB，GitHub Pages 免费版装不下，得换托管方式。">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/index.html">猫窝</a>
+  <nav>
+    <a href="/index.html">文章</a>
+    <a href="/archive.html">归档</a>
+    <a href="/tags.html">标签</a>
+    <a href="/neko/index.html">猫娘</a>
+    <a href="/about.html">关于</a>
+  </nav>
+</header>
+<main class="post-wrap">
+  <article class="post">
+    <h1 class="post-title">猫娘展示页：195 个模型的代价</h1>
+    <p class="post-meta">2026 年 10 月 06 日</p>
+    <div class="tags"><a class="tag" href="/tags/猫娘乐园.html">#猫娘乐园</a><a class="tag" href="/tags/静态资源.html">#静态资源</a><a class="tag" href="/tags/GitHub.html">#GitHub</a></div>
+    <div class="post-body">
+<p>想在博客侧栏放一只会动的猫娘。找了一圈，锁定 <a href="https://github.com/Chocola-X/NekoWebShow">NekoWebShow</a> —— 在网页上展示《猫娘乐园》的 E-mote 立绘，能触摸、有语音、口型同步，背景还会跟着本地时间从白天变到夜晚。</p>
+<h2 id="_1">它是什么</h2>
+<p>严格说不是「后端项目」。作者在 README 里写得很清楚：</p>
+<blockquote>
+<p>项目不需要数据库或前端构建步骤。</p>
+</blockquote>
+<p>四个分支里三个是纯静态的。PHP 版本也只是用 PHP 读一份 JSON 来生成菜单，没有任何用户数据。</p>
+<p>所以我上一版方案里推荐的托管数据库，纯属多余。</p>
+<h2 id="_2">体积才是真问题</h2>
+<p>先看仓库：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>仓库总体积</td>
+<td>1.88 GB</td>
+</tr>
+<tr>
+<td>模型数量</td>
+<td>195</td>
+</tr>
+<tr>
+<td>单个模型</td>
+<td>2 ~ 3 MB</td>
+</tr>
+<tr>
+<td>背景图</td>
+<td>121 张</td>
+</tr>
+<tr>
+<td>核心代码</td>
+<td>约 150 KB</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1.88 GB</strong>。GitHub Pages 免费版单站上限 1 GB —— 直接超。要么开付费版，要么换地方。</p>
+<p>于是我选了 Cloudflare Pages。它没有这个限制，自带 CDN 和 HTTPS，构建时跑一条命令就完事。</p>
+<h2 id="_3">分支怎么选</h2>
+<p>作者提供了四个分支，用途不同：</p>
+<table>
+<thead>
+<tr>
+<th>分支</th>
+<th>形态</th>
+<th>部署要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>main</code></td>
+<td>PHP 入口，含模型转换页</td>
+<td>需 PHP + URL 重写</td>
+</tr>
+<tr>
+<td><code>php_version</code></td>
+<td>PHP 部署版</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>html_version</code></td>
+<td>多页面静态，每模型一个 <code>.html</code></td>
+<td>静态服务即可</td>
+</tr>
+<tr>
+<td><code>html_version_v2</code></td>
+<td>单页面静态，<code>#模型名</code> 切换</td>
+<td>静态服务即可</td>
+</tr>
+</tbody>
+</table>
+<p><strong>我选了 <code>html_version_v2</code>。</strong> 只有一个 <code>index.html</code>，切换角色在同一页面内完成，不刷新。浏览器前进后退也能切模型，选择存在 cookie 里一年有效。</p>
+<p>关键是它<strong>不需要 URL 重写</strong>—— 这一点对托管环境的兼容性影响很大。</p>
+<h2 id="_4">版权这件事得说清楚</h2>
+<p>模型和背景图是<strong>从正版游戏解包出来的素材</strong>。作者自己在 README 里承认了，来源是 UlyssesWu 的猫娘动态壁纸、NEKOPARA Vol 4 和 Afer 的解包素材，并注明「感谢正版游戏没有加密，直接就拿出来了」。</p>
+<p>代码是 AGPL v3，允许多用、要求保留作者信息。但<strong>素材的版权和代码的许可证是两回事</strong>。</p>
+<p>作者挂在 <code>show.nekopara.uk</code> 是他自己的站点，他自己承担。我要是挂在自己的域名上，那就是另一回事了。</p>
+<p>这是我知道的，我会照实记在这里。至于是不是要长期公开，那是另一笔账，得自己算。</p>
+<hr />
+<h2 id="_5">下一步</h2>
+<p>素材该怎么托管还没定。500MB 的模型文件直接塞 Git 仓库不太合适，单文件限制倒是不怕（每个才 2-3 MB），但仓库总体积和 clone 体验是另一回事。</p>
+<p>几个候选：</p>
+<ul>
+<li><strong>Git LFS</strong> —— 存大文件的正道，但需要额外配置，且 Pages 构建时要注意拉取</li>
+<li><strong>Cloudflare R2</strong> —— 对象存储，按量付费，但 Cloudflare 内部访问免费</li>
+<li><strong>直接放仓库</strong> —— 最简单，先看看实际能不能撑住</li>
+</ul>
+<p>先跑起来再说。</p>
+    </div>
+    <nav class="post-nav">
+      <a href="/index.html">← 返回文章列表</a>
+    </nav>
+  </article>
+</main>
+<footer class="site-foot">
+  <p>猫窝 · 技术与猫娘的据点</p>
+  <p>© 2026 陆晓海 · 由 Markdown 编译生成</p>
+</footer>
+</body>
+</html>

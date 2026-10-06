@@ -1,0 +1,270 @@
+/* 猫窝 · 站点样式
+   配色克制，正文优先。宽度 720px 居中，代码块可横向滚动。 */
+
+:root {
+  --ink: #2c2c2a;
+  --ink-2: #5f5e5a;
+  --ink-3: #888780;
+  --line: rgba(0, 0, 0, 0.12);
+  --bg: #fdfdfc;
+  --card: #ffffff;
+  --accent: #993556;
+  --accent-soft: #fbeaf0;
+  --code-bg: #f5f4f0;
+  --maxw: 720px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans SC",
+               "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ---------- 顶栏 ---------- */
+.site-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 28px 20px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.site-head nav { display: flex; gap: 20px; flex-wrap: wrap; }
+
+.site-head nav a {
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: 14px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color .15s, border-color .15s;
+}
+
+.site-head nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ---------- 布局 ---------- */
+.list-wrap, .post-wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 32px 20px 56px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 6px;
+}
+
+.page-desc { color: var(--ink-3); font-size: 14px; margin: 0 0 28px; }
+
+/* ---------- 文章卡片 ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin-bottom: 16px;
+}
+
+.card h2 { font-size: 18px; font-weight: 500; margin: 0 0 6px; }
+
+.card h2 a { color: var(--ink); text-decoration: none; }
+.card h2 a:hover { color: var(--accent); }
+
+.card-meta { color: var(--ink-3); font-size: 13px; margin: 0 0 10px; }
+
+.card-sum {
+  color: var(--ink-2);
+  font-size: 14.5px;
+  margin: 0 0 12px;
+  line-height: 1.7;
+}
+
+.card-tags { margin: 0; }
+
+/* ---------- 标签 ---------- */
+.tag {
+  display: inline-block;
+  font-size: 12.5px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 2px 10px;
+  margin: 0 6px 6px 0;
+  text-decoration: none;
+}
+
+.tag:hover { background: #f6dbe5; }
+
+.tag-n {
+  font-size: 11px;
+  color: var(--ink-3);
+  margin-left: 4px;
+}
+
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.tags { margin: 0 0 24px; }
+
+/* ---------- 单篇文章 ---------- */
+.post {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 36px 40px;
+}
+
+.post-title { font-size: 26px; font-weight: 500; margin: 0 0 8px; line-height: 1.35; }
+
+.post-meta { color: var(--ink-3); font-size: 13.5px; margin: 0 0 20px; }
+
+.post-body { font-size: 15.5px; }
+
+.post-body h1, .post-body h2, .post-body h3 {
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 32px 0 12px;
+}
+
+.post-body h1 { font-size: 22px; }
+.post-body h2 { font-size: 19px; }
+.post-body h3 { font-size: 17px; }
+
+.post-body p { margin: 0 0 15px; }
+
+.post-body a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(153, 53, 86, .3); }
+.post-body a:hover { border-bottom-color: var(--accent); }
+
+.post-body img { max-width: 100%; border-radius: 8px; }
+
+.post-body blockquote {
+  margin: 18px 0;
+  padding: 2px 0 2px 16px;
+  border-left: 3px solid var(--accent-soft);
+  color: var(--ink-2);
+}
+
+.post-body ul, .post-body ol { padding-left: 24px; margin: 0 0 15px; }
+.post-body li { margin-bottom: 5px; }
+
+.post-body hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+
+.post-body code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 13.5px;
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.post-body pre {
+  background: var(--code-bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  margin: 0 0 18px;
+}
+
+.post-body pre code { background: none; padding: 0; font-size: 13px; }
+
+/* pygments 高亮—— 与整体配色一致的浅色方案 */
+.codehilite { background: var(--code-bg); }
+.codehilite .k, .codehilite .kn, .codehilite .kd { color: #993556; }
+.codehilite .s, .codehilite .s1, .codehilite .s2 { color: #0f6e56; }
+.codehilite .c, .codehilite .c1, .codehilite .cm { color: #888780; font-style: italic; }
+.codehilite .nf { color: #185fa5; }
+.codehilite .nc { color: #854f0b; }
+.codehilite .m, .codehilite .mi { color: #3b6d11; }
+
+.post-nav {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.post-nav a { color: var(--ink-2); text-decoration: none; }
+.post-nav a:hover { color: var(--accent); }
+
+/* ---------- 归档 ---------- */
+.arc-group { margin-bottom: 32px; }
+.arc-group h2 { font-size: 16px; font-weight: 500; color: var(--ink-2); margin: 0 0 10px; }
+.arc-group ul { list-style: none; padding: 0; margin: 0; }
+.arc-group li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+.arc-group li a { color: var(--ink); text-decoration: none; font-size: 15px; }
+.arc-group li a:hover { color: var(--accent); }
+.arc-date { color: var(--ink-3); font-size: 13px; white-space: nowrap; }
+
+.empty { color: var(--ink-3); font-size: 14px; }
+
+/* ---------- 猫娘页容器 ---------- */
+.neko-frame {
+  border: 0;
+  width: 100%;
+  height: 620px;
+  border-radius: 12px;
+  display: block;
+}
+
+.neko-note {
+  background: var(--accent-soft);
+  border: 1px solid rgba(153, 53, 86, .2);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 24px;
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+
+.neko-note strong { color: var(--accent); font-weight: 500; }
+
+/* ---------- 页脚 ---------- */
+.site-foot {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: 13px;
+  text-align: center;
+}
+
+.site-foot p { margin: 3px 0; }
+
+/* ---------- 窄屏 ---------- */
+@media (max-width: 640px) {
+  .post { padding: 26px 20px; }
+  .post-title { font-size: 22px; }
+  .site-head { padding: 20px 16px 16px; }
+  .list-wrap, .post-wrap { padding: 24px 16px 44px; }
+  .neko-frame { height: 480px; }
+  .arc-group li { flex-direction: column; gap: 2px; }
+}

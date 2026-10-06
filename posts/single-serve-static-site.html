@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用静态博客承载一个 1.9GB 的开源项目 · 猫窝</title>
+<meta name="description" content="把195 个模型、121 张背景的猫娘展示页和博客放在一起，怎么做到零服务器、零续费、push 即发布。">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="/index.html">猫窝</a>
+  <nav>
+    <a href="/index.html">文章</a>
+    <a href="/archive.html">归档</a>
+    <a href="/tags.html">标签</a>
+    <a href="/neko/index.html">猫娘</a>
+    <a href="/about.html">关于</a>
+  </nav>
+</header>
+<main class="post-wrap">
+  <article class="post">
+    <h1 class="post-title">用静态博客承载一个 1.9GB 的开源项目</h1>
+    <p class="post-meta">2026 年 10 月 06 日</p>
+    <div class="tags"><a class="tag" href="/tags/部署.html">#部署</a><a class="tag" href="/tags/静态站点.html">#静态站点</a><a class="tag" href="/tags/Cloudflare.html">#Cloudflare</a></div>
+    <div class="post-body">
+<p>做这个站的时候，我最初想的是找台虚拟主机。Typecho 装上去，MySQL 建好，文章能写，猫娘页丢进子目录 —— 听起来很顺。</p>
+<p>后来我算了一笔账，掉头做了另一套。</p>
+<h2 id="_1">原来的方案有什么问题</h2>
+<p>虚拟主机的真实成本不只是每年续费的钱：</p>
+<ul>
+<li><strong>PHP 和 MySQL 要你维护。</strong> 版本一升可能就白屏，你得懂一点服务器运维才能救回来。</li>
+<li><strong>备份是个纪律活。</strong> 三个月不备份，某天手滑删了库，网站就空了。</li>
+<li><strong>改个东西要传文件。</strong> 十几篇文章还要维护一个数据库，凭什么。</li>
+</ul>
+<h2 id="_2">现在的方案：仓库即网站</h2>
+<p>结构简单到有点粗暴：</p>
+<div class="codehilite"><pre><span></span><code>你的仓库
+├── posts/          文章，Markdown 写
+├── static/         样式、图片
+├── src/build.py    构建脚本
+└── site/           构建产物，直接就是网站
+</code></pre></div>
+
+<p>提交代码，Cloudflare Pages 自动跑 <code>build.py</code>，把 <code>site/</code> 发布出去。整个过程没有服务器。</p>
+<h2 id="_3">构建脚本做了什么</h2>
+<p>它做的事很直白，一百来行：</p>
+<ol>
+<li>读 <code>posts/</code> 下所有 <code>.md</code></li>
+<li>剥掉头部的元信息（标题、日期、标签、摘要）</li>
+<li>正文走 Markdown 渲染，代码块带语法高亮</li>
+<li>生成文章页、列表页、归档页、标签页</li>
+<li>顺手产出 <code>rss.xml</code> 给订阅</li>
+</ol>
+<p>没有框架，没有 <code>node_modules</code>，跑起来只要两秒。</p>
+<div class="codehilite"><pre><span></span><code><span class="n">meta</span><span class="p">,</span> <span class="n">body</span> <span class="o">=</span> <span class="n">parse_front_matter</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+<span class="n">body_html</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="n">write</span><span class="p">(</span><span class="n">render_post</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">body_html</span><span class="p">))</span>
+</code></pre></div>
+
+<h2 id="_4">好处在哪</h2>
+<p><strong>发布就是提交。</strong> 本地写完 Markdown，<code>git push</code>，网站自己更新了。不需要 FTP，不需要记得改什么配置。</p>
+<p><strong>不需要续费。</strong> 免费额度的静态托管对你这种规模的站绰绰有余。</p>
+<p><strong>数据在自己手里。</strong> 文章是纯文本的 Markdown，就算哪天这个博客不开了，文件全在你本地。</p>
+<h2 id="_5">代价</h2>
+<p><strong>没有评论系统。</strong> 静态站要评论得接第三方服务（如 Giscus，基于 GitHub Issues）。想要的话可以加，但那就多了一层依赖。</p>
+<p><strong>没有动态搜索。</strong> 195 篇文章以后可能会需要，但那是后面的事。</p>
+<hr />
+<p>这套东西我打算长期用下去。后面再写几篇部署相关的踩坑记录。</p>
+    </div>
+    <nav class="post-nav">
+      <a href="/index.html">← 返回文章列表</a>
+    </nav>
+  </article>
+</main>
+<footer class="site-foot">
+  <p>猫窝 · 技术与猫娘的据点</p>
+  <p>© 2026 陆晓海 · 由 Markdown 编译生成</p>
+</footer>
+</body>
+</html>

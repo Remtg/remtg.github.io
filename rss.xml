@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>猫窝</title>
+    <link>https://c:\users\23194\workbuddy\2026-10-06-13-11-11\site.pages.dev/</link>
+    <description>技术与猫娘的据点</description>
+    <language>zh-CN</language>
+    <item>
+      <title>猫娘展示页：195 个模型的代价</title>
+      <link>https://c:\users\23194\workbuddy\2026-10-06-13-11-11\site.pages.dev/posts/neko-web-show.html</link>
+      <guid>https://c:\users\23194\workbuddy\2026-10-06-13-11-11\site.pages.dev/posts/neko-web-show.html</guid>
+      <description>NekoWebShow 单页版部署实录。195 个模型每个 2-3 MB，仓库 1.9GB，GitHub Pages 免费版装不下，得换托管方式。</description>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 +0800</pubDate>
+    </item>
+    <item>
+      <title>用静态博客承载一个 1.9GB 的开源项目</title>
+      <link>https://c:\users\23194\workbuddy\2026-10-06-13-11-11\site.pages.dev/posts/single-serve-static-site.html</link>
+      <guid>https://c:\users\23194\workbuddy\2026-10-06-13-11-11\site.pages.dev/posts/single-serve-static-site.html</guid>
+      <description>把195 个模型、121 张背景的猫娘展示页和博客放在一起，怎么做到零服务器、零续费、push 即发布。</description>
+      <pubDate>Tue, 06 Oct 2026 00:00:00 +0800</pubDate>
+    </item>
+  </channel>
+</rss>

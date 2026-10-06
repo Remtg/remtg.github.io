@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "neko-web-show",
+    "title": "猫娘展示页：195 个模型的代价",
+    "date": "2026-10-06",
+    "tags": [
+      "猫娘乐园",
+      "静态资源",
+      "GitHub"
+    ],
+    "summary": "NekoWebShow 单页版部署实录。195 个模型每个 2-3 MB，仓库 1.9GB，GitHub Pages 免费版装不下，得换托管方式。",
+    "read_min": 3
+  },
+  {
+    "slug": "single-serve-static-site",
+    "title": "用静态博客承载一个 1.9GB 的开源项目",
+    "date": "2026-10-06",
+    "tags": [
+      "部署",
+      "静态站点",
+      "Cloudflare"
+    ],
+    "summary": "把195 个模型、121 张背景的猫娘展示页和博客放在一起，怎么做到零服务器、零续费、push 即发布。",
+    "read_min": 2
+  }
+]
